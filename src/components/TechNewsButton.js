@@ -14,7 +14,7 @@ const TechNewsButton = ({ changedTechClick, techNews}) => {
                 onClick={clicked}
                 className='tech-btn'
                 >
-                    <Link to='/tech'>Tech News</Link>
+                    <Link to='/tech'>Tech</Link>
                     
             </button>
         </div>

@@ -10,6 +10,7 @@ import TopNews from './TopNews';
 import SportsNews from '../pages/SportsNews';
 import { useState } from 'react';
 import Weather from './Weather';
+import Stocks from './Stocks';
 
 const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
 
@@ -44,6 +45,13 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
             setShowWeather(false)
         }
     }
+
+    const headerWeather = () => {
+        setShowWeather(true)
+        setIsTopNewsClicked(false)
+        setIsClicked(false)
+        setIsSportsClicked(false)
+    }
   
     return (
     <header>
@@ -53,13 +61,13 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                 <h1>The News</h1>
                 <div className="options-container">
                     <ul className='header-ul'>
-                        <li>Weather</li>
+                        <li onClick={headerWeather}>Weather</li>
                         <li>Sports</li>
                     </ul>
                 </div>
             </div>
             <div className="news-btns">
-            <HomeButton setShowWeather={setShowWeather}/>
+            <HomeButton setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
             <TopNewsButton 
                 changedTopClick={changedTopClick}
                 />
@@ -70,7 +78,12 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                 changedSportsClick={changedSportsClick}
                 />
             </div>
+            <div className="stocks-weather-container">
+            {showWeather && <Stocks />}
             {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} />) : ''}
+
+            </div>
+
         </div>
         <Routes>
             <Route path='/tech' element={<div>{isClicked ?  <TechNews techNews={techNews} /> : ''}</div>}/>

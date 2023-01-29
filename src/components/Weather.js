@@ -32,7 +32,7 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
         setUserCity(cityInput)
     }
   return (
-    <div className="weather-container">
+    <div >
         <motion.div 
         initial={{x: '100vw'}}
         animate={{x: 0}}
@@ -40,22 +40,23 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
             className="weather-content">
                 <form onSubmit={onSubmitHandler}>
                     <div className="form-container">
+                        <h2>Weather Forecast</h2>
                         <input type="text" 
                             placeholder='Enter City'
                             value={cityInput}
                             onChange={inputTextHandler}
                             />
                     </div>
-                    <button>Search</button>
+                    <button className='search-btn'>Search</button>
                 </form>
             <div className='weather-results'>
                 <div className="weather-results-container">
                     <h2>{weatherData.name}</h2>
-                    <p>Temp: {weatherData.main.temp}</p>
+                    <p>Temp: {weatherData.main.temp.toFixed(0)}</p>
                     <p>Humidity: {weatherData.main.humidity}</p>
-                    <p>Wind: {weatherData.wind.speed}</p>
+                    <p>Wind: {weatherData.wind.speed.toFixed(0)}mph</p>
                     <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt="" />
-                    <p>{weatherData.weather[0].description}</p>
+                    <p className='weather-desc'>{weatherData.weather[0].description}</p>
 
                 </div>
             </div>

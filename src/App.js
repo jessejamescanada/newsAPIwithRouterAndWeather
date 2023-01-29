@@ -68,8 +68,6 @@ function App() {
   }
 
   // weather
-
-
   useEffect(() => {
       getWeather()
   },[userCity])
