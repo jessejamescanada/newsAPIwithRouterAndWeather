@@ -196,7 +196,6 @@ body{
   display: flex;
   justify-content: space-between;
   width: auto;
-  /* position: absolute; */
   transform: translateY(800%);
 }
 .left-btn{

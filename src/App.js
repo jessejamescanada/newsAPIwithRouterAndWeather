@@ -4,7 +4,6 @@ import {useEffect, useState} from 'react'
 import Header from './components/Header';
 
 function App() {
-  const apiKey = 'e853281ea7754622b58941754cedafaf'
   const [topNews, setTopNews] = useState([])
   const [techNews, setTechNews] = useState([])
   const [sportsNews, setSportsNews] = useState([])
@@ -74,7 +73,7 @@ function App() {
 
           const data = await api.json()
           setWeatherData(data)
-          if(data.cod == '404'){
+          if(data.cod === '404'){
             setUserCity('miami')
             setCityInput('')
           }
