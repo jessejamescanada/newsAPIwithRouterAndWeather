@@ -4,6 +4,7 @@ import {motion} from 'framer-motion'
 import {useState} from 'react'
 
 const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
+    const [error, setError] = useState('')
 
     // const [weatherData, setWeatherData] = useState([])
     // const apiKey = 'cbdb06c75c00a30fb0a8d241f1ef5392'
@@ -29,7 +30,16 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
     }
     const onSubmitHandler = e => {
         e.preventDefault()
-        setUserCity(cityInput)
+        if(cityInput === ''){
+            setError('please enter a city')
+            setTimeout(() => {
+                setError('')
+            }, 2000);
+        }else{
+            setUserCity(cityInput)
+            setCityInput('')
+        }
+        
     }
   return (
     <div >
@@ -47,6 +57,7 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
                             onChange={inputTextHandler}
                             />
                     </div>
+                    <div className='error'>{error}</div>
                     <button className='search-btn'>Search</button>
                 </form>
             <div className='weather-results'>

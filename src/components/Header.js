@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRef } from 'react';
 import '../App.css';
 import HomeButton from './HomeButton';
 import TechNewsButton from './TechNewsButton';
@@ -11,6 +12,8 @@ import SportsNews from '../pages/SportsNews';
 import { useState } from 'react';
 import Weather from './Weather';
 import Stocks from './Stocks';
+import {FaChevronLeft, FaChevronRight} from 'react-icons/fa'
+import Home from './Home';
 
 const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
 
@@ -18,6 +21,10 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     const [isTopNewsClicked, setIsTopNewsClicked] = useState(false)
     const [isSportsClicked, setIsSportsClicked] = useState(false)
     const [showWeather, setShowWeather] = useState(true)
+    const [showTopNews, setShowTopNews] = useState(true)
+    const [imgWidth, setImgWidth] = useState(null)
+    const imgRef = useRef(null)
+    const elementRef = useRef(null)
   
     const changedSportsClick = () => {
         setIsSportsClicked(prevClick => !prevClick)
@@ -43,31 +50,37 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     const changeWeather = () => {
         if((isClicked === false) || (isSportsClicked === false) || (isTopNewsClicked === false)){
             setShowWeather(false)
+            setShowTopNews(false)
         }
     }
 
-    const headerWeather = () => {
-        setShowWeather(true)
-        setIsTopNewsClicked(false)
-        setIsClicked(false)
-        setIsSportsClicked(false)
+    const handleScroll = (element, speed, distance, step) => {
+        console.log(distance)
+        let scrollAmount = 0
+        const slideTimer = setInterval(() => {
+            element.scrollLeft += step
+            scrollAmount += Math.abs(step)
+            if(scrollAmount >= distance){
+                clearInterval(slideTimer)
+            }
+        }, speed);
     }
-  
+
+    // icon styling
+    const arrowLeftStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7' }
+    const arrowRightStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7'}
+    
     return (
     <header>
         <div className="header-container">
             <div className="header-items-container">
-                <h3>Menu</h3>
                 <h1>The News</h1>
                 <div className="options-container">
-                    <ul className='header-ul'>
-                        <li onClick={headerWeather}>Weather</li>
-                        <li>Sports</li>
-                    </ul>
                 </div>
             </div>
+            {/* <NewsTicker topNews={topNews} /> */}
             <div className="news-btns">
-            <HomeButton setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
+            <HomeButton setShowTopNews={setShowTopNews} setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
             <TopNewsButton 
                 changedTopClick={changedTopClick}
                 />
@@ -79,17 +92,40 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                 />
             </div>
             <div className="stocks-weather-container">
-            {showWeather && <Stocks />}
-            {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} />) : ''}
-
+                {showTopNews ? <div className="top-news-section">
+                    <h2 className='trending-h2'>Trending</h2>
+                    <div className="top-news-content" ref={elementRef} >
+                        {topNews.map((item) => {
+                            return(
+                                <>
+                                <a href={item.url}  className="showcase-container">
+                                    <div ref={imgRef} key={item.url}>
+                                    <img src={item.urlToImage} className="top-img-home" alt=""  onLoad={() => setImgWidth(imgRef.current.scrollWidth)}/>
+                                    </div>
+                                    <div className="showcase-title">
+                                        {item.title}
+                                    </div>
+                                </a>
+                                </>
+                            )
+                        })}
+                    </div>
+                    <div className="top-btn-container">
+                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
+                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
+                    </div>
+                </div> : ''}
+                <div className="stocks-weather">
+                    {showWeather && <Stocks />}
+                    {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} />) : ''}
+                </div>
             </div>
-
         </div>
         <Routes>
-            <Route path='/tech' element={<div>{isClicked ?  <TechNews techNews={techNews} /> : ''}</div>}/>
-            <Route path='/top' element={<div>{isTopNewsClicked ? <TopNews topNews={topNews}  /> : ''}</div>}/>
-            <Route path='/sports' element={<div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} /> : ''}</div>}/>
-        
+            <Route path='/' element={<Home />}/>
+            <Route path='/tech/*' element={<div>{isClicked ?  <TechNews techNews={techNews} /> : ''}</div>}/>
+            <Route path='/top/*' element={<div>{isTopNewsClicked ? <TopNews topNews={topNews}  /> : ''}</div>}/>
+            <Route path='/sports/*' element={<div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} /> : ''}</div>}/>
         </Routes>
     </header>
   )
@@ -97,4 +133,3 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
 
 export default Header
 
-// to get route to load that pages content (eg, /Tech on reload loads the articles), you have to remove the 'isClicked ? ' condition

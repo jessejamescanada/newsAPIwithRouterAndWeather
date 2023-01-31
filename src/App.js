@@ -78,9 +78,13 @@ function App() {
 
           const data = await api.json()
           setWeatherData(data)
-          console.log(data)
+          if(data.cod == '404'){
+            setUserCity('miami')
+            setCityInput('')
+          }
       }catch(err){
           console.log(err)
+          setUserCity('buffalo')
       }
   }
   return (

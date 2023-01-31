@@ -13,11 +13,11 @@ const Stocks = () => {
 
     const getStocks = async () => {
         try{
-            const api = await fetch(`https://api.stockdata.org/v1/data/quote?symbols=AAPL,TSLA,MSFT&api_token=${stockApi}`)
+            const api = await fetch(`https://api.stockdata.org/v1/data/quote?symbols=AAPL,TSLA,XOM&api_token=${stockApi}`)
 
             const data = await api.json()
             setStockData(data)
-            console.log(stockData)
+            // console.log(stockData)
         }catch(err){
             console.log(err)
         }
