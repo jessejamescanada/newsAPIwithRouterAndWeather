@@ -13,7 +13,7 @@ const TopNews = ({topNews}) => {
                 <h2 className="title">{item.title.length > 70 ? `${item.title.substring(0, 70)}...` : item.title}</h2>
             </div>
             <div className="img-container">
-                <img src={item.urlToImage} alt={item.publishedAt} className='news-image'/>
+                <img src={item.image} alt={item.publishedAt} className='news-image'/>
             </div>
             <div className="news-description">
               <p>{item.description > 200 ? `${item.description.substring(0, 200)}...` : item.description}</p>

@@ -186,6 +186,7 @@ body{
 }
 .top-news-section{
   width: 60%;
+  transform: translateY(-15%);
 }
 .top-news-container{
   height: 200px;
@@ -239,7 +240,7 @@ svg{
 }
 .showcase-title{
   padding: 0px 20px;
-  color: white;
+  color: #383838;
   font-weight: 700;
   letter-spacing: 1.4px;
 }

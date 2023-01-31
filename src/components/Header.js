@@ -1,19 +1,18 @@
 import React from 'react'
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
+import { Route, Routes } from "react-router-dom"
 import '../App.css';
 import HomeButton from './HomeButton';
 import TechNewsButton from './TechNewsButton';
 import TopNewsButton from './TopNewsButton';
 import SportsNewsButton from './SportsNewsButton';
-import { Route, Routes } from "react-router-dom"
-import TechNews from './TechNews';
-import TopNews from './TopNews';
+import TechNews from '../pages/TechNews';
+import TopNews from '../pages/TopNews';
 import SportsNews from '../pages/SportsNews';
-import { useState } from 'react';
 import Weather from './Weather';
 import Stocks from './Stocks';
+import Home from '../pages/Home';
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa'
-import Home from './Home';
 import {motion} from 'framer-motion'
 
 const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
@@ -86,7 +85,6 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                 <div className="options-container">
                 </div>
             </div>
-            {/* <NewsTicker topNews={topNews} /> */}
             <div className="news-btns">
             <HomeButton setShowTopNews={setShowTopNews} setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
             <TopNewsButton 
@@ -111,7 +109,7 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                                 <>
                                 <a href={item.url}  className="showcase-container">
                                     <div ref={imgRef} key={item.url}>
-                                    <img src={item.urlToImage} className="top-img-home" alt=""  onLoad={() => setImgWidth(imgRef.current.scrollWidth)}/>
+                                    <img src={item.image} className="top-img-home" alt=""  onLoad={() => setImgWidth(imgRef.current.scrollWidth)}/>
                                     </div>
                                     <div className="showcase-title">
                                         {item.title}

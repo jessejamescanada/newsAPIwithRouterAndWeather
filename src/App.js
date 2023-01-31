@@ -1,11 +1,7 @@
 
 import './App.css';
 import {useEffect, useState} from 'react'
-import { Route, Routes } from "react-router-dom"
 import Header from './components/Header';
-import TechNews from './components/TechNews';
-import TopNews from './components/TopNews';
-import SportsNews from './pages/SportsNews';
 
 function App() {
   const apiKey = 'e853281ea7754622b58941754cedafaf'
@@ -19,6 +15,7 @@ function App() {
   const apiKey2 = 'cbdb06c75c00a30fb0a8d241f1ef5392'
   const [cityInput, setCityInput] = useState('')
   const [userCity, setUserCity] = useState('')
+  const newsApiKey = '1909ddf9282f17d5e8e3217eb7ac411f'
 
   // Top News
   useEffect(() => {
@@ -27,8 +24,9 @@ function App() {
 
   const getNews = async () => {
     try{
-      const api = await fetch(`https://newsapi.org/v2/top-headlines?country=us&sortBy=popular&pageSize=10&apiKey=${apiKey}`)
+      const api = await fetch(`https://gnews.io/api/v4/top-headlines?topic=breaking-news&token=${newsApiKey}&lang=en&country=us&max=9`)
       const data = await api.json()
+      console.log(data)
       setTopNews(data.articles)
     }catch(err){
       console.log(err)
@@ -42,7 +40,7 @@ function App() {
 
   const getTechNews = async () => {
     try{
-      const api = await fetch(`https://newsapi.org/v2/everything?q=apple+microsoft+tesla+chatgpt&sortBy=popularity&pageSize=10&apiKey=${apiKey}`)
+      const api = await fetch(`https://gnews.io/api/v4/top-headlines?topic=technology&token=${newsApiKey}&lang=en&country=us&max=9`)
       const data = await api.json()
       setTechNews(data.articles)
     }catch(err){
@@ -57,10 +55,9 @@ function App() {
 
   const getSportsNews = async () => {
     try{
-      const api = await fetch(`https://newsapi.org/v2/everything?q=nfl+nba+baseball&sortBy=popularity&pageSize=10&apiKey=${apiKey}`)
+      const api = await fetch(`https://gnews.io/api/v4/top-headlines?topic=sports&token=${newsApiKey}&lang=en&country=us&max=9`)
       const data = await api.json()
       setSportsNews(data.articles)
-      
     }catch(err){
       console.log(err)
     }
@@ -105,9 +102,6 @@ function App() {
         userCity={userCity}
         setUserCity={setUserCity}
     />
-      {/* <div>{isClicked ?  <TechNews techNews={techNews} /> : ''}</div>
-      <div>{isTopNewsClicked ? <TopNews topNews={topNews}  /> : ''}</div>
-      <div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} /> : ''}</div> */}
       </div>
   </>
   );

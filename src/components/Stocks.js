@@ -19,7 +19,6 @@ const Stocks = () => {
 
             const data = await api.json()
             setStockData(data)
-            // console.log(stockData)
         }catch(err){
             console.log(err)
         }
@@ -40,5 +39,3 @@ const Stocks = () => {
 }
 
 export default Stocks
-
-// https://api.stockdata.org/v1/data/quote?symbols=AAPL,TSLA,MSFT&api_token=p5KNISYFOld2vvCoGcYRXrjOlqC4XZUAQkjM9c3W 
