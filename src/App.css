@@ -4,7 +4,8 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
-  background: radial-gradient(circle, rgb(141, 7, 123) 0%, rgb(97, 30, 136) 100%);
+  /* background: radial-gradient(circle, rgb(141, 7, 123) 0%, rgb(97, 30, 136) 100%); */
+  background: radial-gradient(circle, rgb(216, 216, 216) 0%, rgb(100, 100, 100) 100%);
   overflow-x: hidden;
 }
 
@@ -38,6 +39,8 @@ body{
 .header-items-container h1{
   font-size: 2.3rem;
   letter-spacing: 1.8px;
+  /* width: 100%; */
+  text-align: center;
 }
 .options-container{
   display: flex;
@@ -192,6 +195,11 @@ body{
   display: flex;
   justify-content: space-between;
   width: auto;
+  /* position: absolute; */
+  transform: translateY(800%);
+}
+.left-btn{
+  height: 400px;
 }
 .top-btn-container button{
   padding: 0;
@@ -210,10 +218,13 @@ svg{
   width: auto;
   overflow-x: hidden;
   margin-top: 4rem;
-  background-color: rgb(199, 206, 230);
+  /* background-color: rgb(199, 206, 230); */
+  background: radial-gradient(circle farthest-corner, rgb(255, 255, 255) 0%, rgb(196, 196, 196) 100%);
   padding-bottom: 3rem;
   padding-top: 5rem;
   border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 6px -3px #000000; 
+  box-shadow: 2px 3px 4px -3px #000000;
 }
 .top-img-home{
   height: 400px;
@@ -236,12 +247,15 @@ svg{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: radial-gradient(circle, rgba(100,0,123,1) 0%, rgba(62,20,86,1) 100%);
+  /* background: radial-gradient(circle, rgba(100,0,123,1) 0%, rgba(62,20,86,1) 100%); */
+  background: radial-gradient(circle, rgb(87, 87, 87) 0%, rgb(224, 224, 224) 100%);
   color: white;
   width: 400px;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
+  -webkit-box-shadow: 4px 4px 6px -3px #000000; 
+  box-shadow: 2px 3px 4px -3px #000000;
 }
 
 .form-container h2{
@@ -256,14 +270,36 @@ svg{
   font-size: 16px;
   margin-bottom: 9px;
 }
+.stock-form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.stock-form input{
+display: flex;
+align-items: center;
+justify-content: center;
+  margin: auto;
+  border: none;
+  padding: 9px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 9px;
+}
 
-.search-btn{
+.search-btn, .stock-btn{
   border: none;
   padding: 8px 16px;
   background-color: rgb(224, 116, 53);
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
+}
+.stock-btn{
+  background-color: rgb(141, 7, 123);
 }
 
 .weather-results{
@@ -297,7 +333,8 @@ svg{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: radial-gradient(circle, rgb(194, 134, 22) 0%, rgb(238, 106, 54) 100%);
+  /* background: radial-gradient(circle, rgb(194, 134, 22) 0%, rgb(238, 106, 54) 100%); */
+  background: radial-gradient(circle, rgb(189, 189, 189) 0%, rgb(138, 138, 138) 100%);
   color: white;
   width: 400px;
   padding: 10px;
@@ -306,6 +343,8 @@ svg{
   stroke-width: 10px;
   stroke-linecap: round;
   fill: transparent;
+  -webkit-box-shadow: 4px 4px 6px -3px #000000; 
+  box-shadow: 2px 3px 4px -3px #000000;
 }
 
 .stock-data{
@@ -346,6 +385,9 @@ svg{
   color: rgb(223, 0, 0);
   font-weight: 600;
 }
+.exclamation{
+  font-size: 3rem;
+}
 
 @media(max-width: 500px){
   .stocks-weather-container{
@@ -366,6 +408,7 @@ svg{
   }
   .weather-content{
     width: 100%;
+    margin-top: 15px;
   }
   .stocks-content{
     width: 100%;

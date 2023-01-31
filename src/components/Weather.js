@@ -5,25 +5,6 @@ import {useState} from 'react'
 
 const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
     const [error, setError] = useState('')
-
-    // const [weatherData, setWeatherData] = useState([])
-    // const apiKey = 'cbdb06c75c00a30fb0a8d241f1ef5392'
-
-    // useEffect(() => {
-    //     getWeather()
-    // },[])
-
-    // const getWeather = async () => {
-    //     try{
-    //         const api = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=buffalo&units=imperial&appid=${apiKey}`)
-
-    //         const data = await api.json()
-    //         setWeatherData(data)
-    //         console.log(data)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
     const inputTextHandler = e => {
         e.preventDefault()
         setCityInput(e.target.value)
@@ -39,7 +20,6 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
             setUserCity(cityInput)
             setCityInput('')
         }
-        
     }
   return (
     <div >

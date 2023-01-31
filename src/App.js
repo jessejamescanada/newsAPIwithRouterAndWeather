@@ -53,12 +53,11 @@ function App() {
   // sports news
   useEffect(() => {
     getSportsNews()
-    
   },[])
 
   const getSportsNews = async () => {
     try{
-      const api = await fetch(`https://newsapi.org/v2/everything?q=nfl+nhl+mlb+nba&sortBy=popularity&pageSize=10&apiKey=${apiKey}`)
+      const api = await fetch(`https://newsapi.org/v2/everything?q=nfl+nba+baseball&sortBy=popularity&pageSize=10&apiKey=${apiKey}`)
       const data = await api.json()
       setSportsNews(data.articles)
       

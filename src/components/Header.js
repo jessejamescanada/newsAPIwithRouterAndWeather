@@ -14,6 +14,7 @@ import Weather from './Weather';
 import Stocks from './Stocks';
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa'
 import Home from './Home';
+import {motion} from 'framer-motion'
 
 const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
 
@@ -75,6 +76,13 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
         <div className="header-container">
             <div className="header-items-container">
                 <h1>The News</h1>
+                <motion.div
+                    initial={{x: '100vw', rotate: 20}}
+                    animate={{x: 0, rotate: 0}}
+                    transition={{delay: 0.2, duration: 1, type: 'tween'}}
+                    className='exclamation'
+                    >!
+                    </motion.div>
                 <div className="options-container">
                 </div>
             </div>
@@ -93,7 +101,10 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
             </div>
             <div className="stocks-weather-container">
                 {showTopNews ? <div className="top-news-section">
-                    <h2 className='trending-h2'>Trending</h2>
+                <div className="top-btn-container">
+                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
+                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
+                    </div>
                     <div className="top-news-content" ref={elementRef} >
                         {topNews.map((item) => {
                             return(
@@ -110,14 +121,14 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                             )
                         })}
                     </div>
-                    <div className="top-btn-container">
+                    {/* <div className="top-btn-container">
                          <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
                          <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
-                    </div>
+                    </div> */}
                 </div> : ''}
-                <div className="stocks-weather">
-                    {showWeather && <Stocks />}
+                <div className="stocks-weather">       
                     {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} />) : ''}
+                    {showWeather && <Stocks />}
                 </div>
             </div>
         </div>
