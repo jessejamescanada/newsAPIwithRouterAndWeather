@@ -107,7 +107,6 @@ body{
 }
 .row button{
   margin: 3px 5px;
-  /* padding: 1rem 2rem; */
   height: 50px;
   width: 120px;
   border: 0;
@@ -119,7 +118,6 @@ body{
 }
 .news-btns button{
   margin: 3px 5px;
-  /* padding: 1rem 2rem; */
   height: 50px;
   width: 120px;
   border: 0;
