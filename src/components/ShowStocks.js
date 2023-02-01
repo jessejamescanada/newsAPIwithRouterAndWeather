@@ -24,12 +24,12 @@ const ShowStocks = ({stockData, stockInput, setStockInput, stockSearch, setStock
         <h2 className='finance-h2'>Finance</h2>
         <form onSubmit={onSubmitHandler} className='stock-form'>
           <input type="text" 
-            placeholder='Search'
+            placeholder='Enter Symbol'
             value={stockInput}
             onChange={stockTextHandler}
           />
           <div className="error">{stockError}</div>
-          <button className='stock-btn'>Submit</button>
+          <button className='stock-btn'>Search</button>
         </form>
         {stockData.data.map((item) => {
             return(

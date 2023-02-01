@@ -3,7 +3,7 @@ import '../App.css';
 import {motion} from 'framer-motion'
 import {useState} from 'react'
 
-const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
+const Weather = ({weatherData, cityInput, setCityInput, displayDate, setUserCity}) => {
     const [error, setError] = useState('')
     const inputTextHandler = e => {
         e.preventDefault()
@@ -28,9 +28,11 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
         animate={{x: 0}}
         transition={{delay: 0.2, duration: 1, type: 'spring', stiffness: 70}}
             className="weather-content">
-                <form onSubmit={onSubmitHandler}>
+                <form onSubmit={onSubmitHandler} className='weather-form'>
+                <h2>Weather Forecast</h2>
+                <div className="date">{`${displayDate[0]}, ${displayDate[1]} ${displayDate[2]}`} </div>
                     <div className="form-container">
-                        <h2>Weather Forecast</h2>
+                        
                         <input type="text" 
                             placeholder='Enter City'
                             value={cityInput}
@@ -43,8 +45,8 @@ const Weather = ({weatherData, cityInput, setCityInput, userCity, setUserCity}) 
             <div className='weather-results'>
                 <div className="weather-results-container">
                     <h2>{weatherData.name}</h2>
-                    <p>Temp: {weatherData.main.temp.toFixed(0)}</p>
-                    <p>Humidity: {weatherData.main.humidity}</p>
+                    <p>Temp: {weatherData.main.temp.toFixed(0)}°</p>
+                    <p>Humidity: {weatherData.main.humidity}%</p>
                     <p>Wind: {weatherData.wind.speed.toFixed(0)}mph</p>
                     <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt="" />
                     <p className='weather-desc'>{weatherData.weather[0].description}</p>

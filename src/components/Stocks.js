@@ -4,7 +4,7 @@ import ShowStocks from './ShowStocks'
 import {motion} from 'framer-motion'
 
 const Stocks = () => {
-    const stockApi = 'uAbMPJG1taDF2dr5xqby8EMSuOZxTcZdSpnK1Eko'
+    const stockApi = 'p5KNISYFOld2vvCoGcYRXrjOlqC4XZUAQkjM9c3W'
     const [stockData, setStockData] = useState([])
     const [stockInput, setStockInput] = useState('')
     const [stockSearch, setStockSearch] = useState('')

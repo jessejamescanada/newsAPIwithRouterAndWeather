@@ -1,4 +1,3 @@
-
 import './App.css';
 import {useEffect, useState} from 'react'
 import Header from './components/Header';
@@ -14,7 +13,7 @@ function App() {
   const apiKey2 = 'cbdb06c75c00a30fb0a8d241f1ef5392'
   const [cityInput, setCityInput] = useState('')
   const [userCity, setUserCity] = useState('')
-  const newsApiKey = '1909ddf9282f17d5e8e3217eb7ac411f'
+  const newsApiKey = '79c1016d1312d100dbb2b62c32f700e1'
 
   // Top News
   useEffect(() => {
@@ -25,7 +24,6 @@ function App() {
     try{
       const api = await fetch(`https://gnews.io/api/v4/top-headlines?topic=breaking-news&token=${newsApiKey}&lang=en&country=us&max=9`)
       const data = await api.json()
-      console.log(data)
       setTopNews(data.articles)
     }catch(err){
       console.log(err)

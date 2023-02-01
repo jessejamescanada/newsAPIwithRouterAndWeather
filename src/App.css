@@ -21,6 +21,16 @@ body{
   font-weight: 600;
 }
 
+/* error page */
+.error-container{
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 /* Header */
 .header-container{
   position: relative;
@@ -45,6 +55,7 @@ body{
 .options-container{
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .header-ul{
@@ -57,21 +68,49 @@ body{
 }
 /* btns */
 .home-btn{
-  background-color: thistle;
+  background: radial-gradient(circle, rgb(216, 216, 216) 0%, rgb(100, 100, 100) 100%);
+  padding: 15px 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+.home-btn:hover{
+  background: rgba(255, 177, 32, 0.836);
+  transition-duration: 1s;
 }
 
 .news-btns{
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
+}
+.row-btns{
+  flex-direction: column;
 }
 .news-btns a{
   text-decoration: none;
-  color: #333;
+  color: #fff;
+  cursor: pointer;
 }
-.news-btns button{
-  margin: 0px 5px;
-  padding: 1rem 2rem;
+.row{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+.row a{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+.row button{
+  margin: 3px 5px;
+  /* padding: 1rem 2rem; */
+  height: 50px;
+  width: 120px;
   border: 0;
   border-radius: 5px;
   font-size: 1rem;
@@ -79,16 +118,57 @@ body{
   box-shadow: 2px 3px 4px -3px #000000;
   cursor: pointer;
 }
+.news-btns button{
+  margin: 3px 5px;
+  /* padding: 1rem 2rem; */
+  height: 50px;
+  width: 120px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1rem;
+  -webkit-box-shadow: 4px 4px 6px -3px #000000; 
+  box-shadow: 2px 3px 4px -3px #000000;
+  cursor: pointer;
+}
+.news-btns .top-btn {
+  margin-left: 30px;
+}
+.news-btns .tech-btn{
+  margin-left: 60px;
+}
+.news-btns .sports-btn{
+  margin-left: 90px;
+}
 .news-btns button:active{
   transform: scale(.98);
 }
 .tech-btn{
-  background-color: cornflowerblue;
+  background: radial-gradient(circle, rgb(51, 51, 51) 0%, rgb(180, 180, 180) 100%);
   color: #fff;
 }
+.tech-btn:hover{
+  background: rgba(75, 75, 240, 0.842);
+  transition-duration: 1s;
+}
 .top-btn{
-  background-color: #a1a1a1;
+  background: radial-gradient(circle, rgb(180, 180, 180) 0%, rgb(44, 44, 44) 100%);
   color: #fff;
+}
+.top-btn:hover{
+  background: rgba(35, 124, 47, 0.781);
+  transition-duration: 1s;
+}
+
+.sports-btn{
+  background: radial-gradient(circle, rgb(216, 216, 216) 0%, rgb(100, 100, 100) 100%);
+}
+.sports-btn:hover{
+  background: rgba(233, 75, 75, 0.836);
+  transition-duration: 1s;
+}
+
+.btns-weather{
+  display: flex;
 }
 
 /* top news page */
@@ -158,7 +238,8 @@ body{
 .home-container{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 1200px;
+  margin: auto;
   height: auto;
 }
 .stocks-weather-container{
@@ -186,7 +267,20 @@ body{
 }
 .top-news-section{
   width: 60%;
-  transform: translateY(-15%);
+  /* transform: translateY(-15%); */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.top-news-section h2{
+  /* transform: translateY(400%); */
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1.6rem;
+  letter-spacing: 1.4px;
+  position: absolute;
+  left: 42%;
 }
 .top-news-container{
   height: 200px;
@@ -195,8 +289,11 @@ body{
 .top-btn-container{
   display: flex;
   justify-content: space-between;
-  width: auto;
-  transform: translateY(800%);
+  /* width: auto; */
+  /* transform: translateY(600%); */
+  position: absolute;
+  top: 45%;
+  width: 100%;
 }
 .left-btn{
   height: 400px;
@@ -217,8 +314,8 @@ svg{
   display: flex;
   width: auto;
   overflow-x: hidden;
-  margin-top: 4rem;
-  background: radial-gradient(circle farthest-corner, rgb(255, 255, 255) 0%, rgb(196, 196, 196) 100%);
+  /* margin-top: 4rem; */
+  background: radial-gradient(circle farthest-corner, rgb(255, 255, 255) 0%, rgb(216, 213, 209) 100%);
   padding-bottom: 3rem;
   padding-top: 5rem;
   border-radius: 10px;
@@ -226,7 +323,8 @@ svg{
   box-shadow: 2px 3px 4px -3px #000000;
 }
 .top-img-home{
-  height: 400px;
+  /* height: 400px; */
+  height: 185px;
   width: 600px;
   scroll-behavior: smooth;
   object-fit: cover;
@@ -244,17 +342,43 @@ svg{
 }
 .weather-content{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   /* background: radial-gradient(circle, rgba(100,0,123,1) 0%, rgba(62,20,86,1) 100%); */
-  background: radial-gradient(circle, rgb(87, 87, 87) 0%, rgb(224, 224, 224) 100%);
+  background: radial-gradient(circle, rgb(228, 228, 228) 0%, rgb(105, 114, 128) 100%);
   color: white;
-  width: 400px;
+  width: 600px;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
   -webkit-box-shadow: 4px 4px 6px -3px #000000; 
   box-shadow: 2px 3px 4px -3px #000000;
+}
+.weather-content form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.weather-form{
+  width: 300px;
+}
+.weather-form h2{
+  margin-bottom: 0;
+}
+.weather-results-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: center;
+  padding-right: 3rem;
+}
+.weather-results-container img{
+  margin-right: 30px;
+}
+.form-container{
+  width: 300px;
 }
 
 .form-container h2{
@@ -326,14 +450,14 @@ justify-content: center;
   align-items: center;
   justify-content: flex-start;
   padding: 0;
-  margin: 20px 0px;
+  margin:  0px;
 }
 .stocks-content{
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* background: radial-gradient(circle, rgb(194, 134, 22) 0%, rgb(238, 106, 54) 100%); */
-  background: radial-gradient(circle, rgb(189, 189, 189) 0%, rgb(138, 138, 138) 100%);
+  background: radial-gradient(circle, rgb(236, 236, 236) 0%, #a09797 100%);
   color: white;
   width: 400px;
   padding: 10px;
@@ -388,8 +512,17 @@ justify-content: center;
   font-size: 3rem;
 }
 
-@media(max-width: 500px){
+@media(max-width:800px){
   .stocks-weather-container{
+    flex-direction: column;
+  }
+  body{
+    background: rgb(216, 216, 216) 0%;
+  }
+  .home-container{
+    width: auto;
+  }
+  .btns-weather{
     flex-direction: column;
   }
   .top-news-section{
@@ -399,7 +532,7 @@ justify-content: center;
     width: auto;
   }
   img.top-img-home{
-    width: 390px;
+    width: 400px;
     
   }
   .stocks-weather{
@@ -408,22 +541,46 @@ justify-content: center;
   .weather-content{
     width: 100%;
     margin-top: 15px;
+    flex-direction: column;
   }
   .stocks-content{
     width: 100%;
+    margin-top: 15px;
   }
   .news-btns{
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .news-btns button{
     margin: 5px;
   }
+  .news-btns .tech-btn {
+    margin-left: 0;
+  }
+  .news-btns .top-btn{
+    margin-left: 0;
+  }
+  .news-btns .sports-btn{
+    margin-left: 0;
+  }
   .news-article-container{
     flex-direction: column;
+    margin-top: 4rem;
   }
   .img-info-container{
     width: auto;
     padding: 0px 10px;
+  }
+  .weather-results-container{
+    align-items: center;
+    padding-right: 0;
+  }
+  .top-news-section h2{
+    left: 35%;
+  }
+  .weather-form{
+    width: auto;
   }
   .news-description p{
     font-size: .9rem;
@@ -433,6 +590,10 @@ justify-content: center;
   }
   .trending-h2{
     display: none;
+  }
+  .row{
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 @media(max-width: 1100px){

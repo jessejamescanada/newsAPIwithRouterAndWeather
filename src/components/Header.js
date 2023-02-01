@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
 import '../App.css';
 import HomeButton from './HomeButton';
@@ -23,8 +23,18 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     const [showWeather, setShowWeather] = useState(true)
     const [showTopNews, setShowTopNews] = useState(true)
     const [imgWidth, setImgWidth] = useState(null)
+    const [displayDate, setDisplayDate] = useState('')
     const imgRef = useRef(null)
     const elementRef = useRef(null)
+
+    const currentDate = () => {
+        let date = new Date()
+        date = date.toString().split(" ")
+        setDisplayDate(date)
+    }
+    useEffect(() => {
+        currentDate()
+    },[])
   
     const changedSportsClick = () => {
         setIsSportsClicked(prevClick => !prevClick)
@@ -69,42 +79,74 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     // icon styling
     const arrowLeftStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7' }
     const arrowRightStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7'}
-    
+
     return (
-    <header>
+    <div>
         <div className="header-container">
             <div className="header-items-container">
                 <h1>The News</h1>
                 <motion.div
-                    initial={{x: '100vw', rotate: 20}}
-                    animate={{x: 0, rotate: 0}}
-                    transition={{delay: 0.2, duration: 1, type: 'tween'}}
+                    initial={{x: 0, rotate: 20}}
+                    animate={{x: 0, rotate: -20}}
+                    transition={{delay: 0.2, duration: 1, repeat: Infinity, repeatType: 'reverse'}}
                     className='exclamation'
                     >!
                     </motion.div>
                 <div className="options-container">
                 </div>
             </div>
-            <div className="news-btns">
-            <HomeButton setShowTopNews={setShowTopNews} setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
-            <TopNewsButton 
-                changedTopClick={changedTopClick}
+
+            <div className="btns-weather">
+                <div className={showWeather ? 'news-btns' : 'row'}>
+                <motion.div
+                        initial={{x: '100vw'}}
+                        animate={{x: 0}}
+                        transition={{delay: 0.2, duration: 0.2, type: 'spring', stiffness: 50}}
+                >
+                        <HomeButton setShowTopNews={setShowTopNews} setShowWeather={setShowWeather} setIsClicked={setIsClicked} setIsTopNewsClicked={setIsTopNewsClicked} setIsSportsClicked={setIsSportsClicked}/>
+                </motion.div>
+                <motion.div                    
+                        initial={{x: '100vw'}}
+                        animate={{x: 0}}
+                        transition={{delay: 0.3, duration: 0.2, type: 'spring', stiffness: 50}}
+                >
+                <TopNewsButton 
+                    changedTopClick={changedTopClick}
                 />
-            <TechNewsButton  
-                changedTechClick={changedTechClick}
+                </motion.div>
+                <motion.div
+                        initial={{x: '100vw'}}
+                        animate={{x: 0}}
+                        transition={{delay: 0.4, duration: 0.2, type: 'spring', stiffness: 50}}
+                >
+                <TechNewsButton  
+                    changedTechClick={changedTechClick}
                 />
-            <SportsNewsButton  
-                changedSportsClick={changedSportsClick}
+                </motion.div>
+                <motion.div
+                        initial={{x: '100vw'}}
+                        animate={{x: 0}}
+                        transition={{delay: 0.5, duration: 0.2, type: 'spring', stiffness: 50}}
+                >
+                <SportsNewsButton  
+                    changedSportsClick={changedSportsClick}
                 />
+                </motion.div>
+                </div>
+                <div className="weather">
+                {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} displayDate={displayDate} />) : ''}
+                </div>
             </div>
+
             <div className="stocks-weather-container">
                 {showTopNews ? <div className="top-news-section">
+                    <h2>trending</h2>
                 <div className="top-btn-container">
                          <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
                          <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
                     </div>
                     <div className="top-news-content" ref={elementRef} >
-                        {topNews.map((item) => {
+                        {topNews ? topNews.map((item) => {
                             return(
                                 <>
                                 <a href={item.url}  className="showcase-container">
@@ -117,26 +159,23 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
                                 </a>
                                 </>
                             )
-                        })}
+                        }): ''}
                     </div>
-                    {/* <div className="top-btn-container">
-                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
-                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
-                    </div> */}
                 </div> : ''}
                 <div className="stocks-weather">       
-                    {(showWeather && typeof weatherData.main != 'undefined') ? (<Weather weatherData={weatherData} cityInput={cityInput} setCityInput={setCityInput} userCity={userCity} setUserCity={setUserCity} />) : ''}
                     {showWeather && <Stocks />}
                 </div>
             </div>
         </div>
         <Routes>
             <Route path='/' element={<Home />}/>
-            <Route path='/tech/*' element={<div>{isClicked ?  <TechNews techNews={techNews} /> : ''}</div>}/>
-            <Route path='/top/*' element={<div>{isTopNewsClicked ? <TopNews topNews={topNews}  /> : ''}</div>}/>
-            <Route path='/sports/*' element={<div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} /> : ''}</div>}/>
+            <Route path='/tech/*' element={<div>{isClicked ?  <TechNews techNews={techNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
+
+            <Route path='/top/*' element={<div>{isTopNewsClicked ? <TopNews topNews={topNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
+
+            <Route path='/sports/*' element={<div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
         </Routes>
-    </header>
+    </div>
   )
 }
 

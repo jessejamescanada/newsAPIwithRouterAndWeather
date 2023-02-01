@@ -1,7 +1,8 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import Error from './Error'
 
-const TechNews = ({techNews}) => {
+const TechNews = ({techNews, setShowWeather, setShowTopNews, setIsTopNewsClicked, setIsClicked, setIsSportsClicked}) => {
   return (
     <>
     <motion.div 
@@ -9,7 +10,7 @@ const TechNews = ({techNews}) => {
             animate={{x: 0}} 
             transition={{delay: 0.2, duration: 0.3, type:'tween'}}>
         <div className="news-article-container">
-            {techNews.map((item) => {
+            {techNews ? techNews.map((item) => {
                 return (
                     <a href={item.url} key={item.url} className='img-info-container'>
                         <div className="title-container">
@@ -23,7 +24,7 @@ const TechNews = ({techNews}) => {
                         </div>
                     </a>
                 )
-            })}
+            }) : <Error setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/>}
         </div>
     </motion.div>
     </>

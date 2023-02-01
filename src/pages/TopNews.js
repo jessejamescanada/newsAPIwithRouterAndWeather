@@ -1,12 +1,13 @@
 import React from 'react'
 import {motion} from 'framer-motion'
+import Error from './Error'
 
-const TopNews = ({topNews}) => {
+const TopNews = ({topNews, setShowWeather, setShowTopNews, setIsTopNewsClicked, setIsClicked, setIsSportsClicked}) => {
   return (
     <>
      <motion.div initial={{x: '-100vw'}} animate={{x: 0}} transition={{delay: 0.2, duration: 0.3, type:'tween'}}>
         <div className="news-article-container">
-        {topNews.map((item) => {
+        {topNews ? topNews.map((item) => {
           return (
           <a href={item.url} key={item.url} className="img-info-container">
             <div className="title-container">
@@ -20,7 +21,7 @@ const TopNews = ({topNews}) => {
             </div>
           </a>
         )
-      })}
+      }): <Error setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/>}
     </div>
 </motion.div>
 </>
