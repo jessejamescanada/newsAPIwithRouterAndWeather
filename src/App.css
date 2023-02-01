@@ -4,7 +4,6 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
-  /* background: radial-gradient(circle, rgb(141, 7, 123) 0%, rgb(97, 30, 136) 100%); */
   background: radial-gradient(circle, rgb(216, 216, 216) 0%, rgb(100, 100, 100) 100%);
   overflow-x: hidden;
 }
