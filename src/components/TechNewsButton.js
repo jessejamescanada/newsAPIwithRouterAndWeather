@@ -7,15 +7,13 @@ const TechNewsButton = ({ changedTechClick, techNews}) => {
     }
     return(
         <>
-        <div>
-            <button 
-                onClick={clicked}
-                className='tech-btn'
-                >
-                    <Link to='/tech'>Tech</Link>
-                    
-            </button>
-        </div>
+            <Link to='/tech'>
+                <button 
+                    onClick={clicked}
+                    className='tech-btn'
+                    >Tech
+                </button>
+            </Link>
         </>
     )
 }

@@ -6,14 +6,15 @@ const SportsNewsButton = ({ changedSportsClick, sportsNews}) => {
         changedSportsClick()
     }
   return (
-    <div>
+    <>
+      <Link to='/sports'>
         <button
             onClick={clicked}
             className='sports-btn'
-            >
-              <Link to='/sports'>Sports</Link>
-        </button>
-    </div>
+            >Sports
+          </button>
+        </Link> 
+    </>
   )
 }
 

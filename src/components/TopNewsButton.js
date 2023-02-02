@@ -7,14 +7,15 @@ const TopNewsButton = ({changedTopClick, topNews}) => {
         changedTopClick()
     }
   return (
-    <div>
+    <>
+      <Link to='/top'>
         <button
-             onClick={clicked}
-             className='top-btn'
-             >
-             <Link to='/top'>Top News</Link>
+          onClick={clicked}
+          className='top-btn'
+          >Top News
         </button>
-    </div>
+      </Link>
+    </>
   )
 }
 
