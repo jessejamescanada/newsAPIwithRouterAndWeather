@@ -216,6 +216,8 @@ body{
 
 .news-image{
   width: 300px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .img-info-container p{
@@ -603,6 +605,8 @@ justify-content: center;
   }
   .news-image{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .news-description{
     height: auto;
