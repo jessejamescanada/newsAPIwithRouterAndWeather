@@ -3,6 +3,10 @@ import {motion} from 'framer-motion'
 import Error from './Error'
 
 const TechNews = ({techNews, setShowWeather, setShowTopNews, setIsTopNewsClicked, setIsClicked, setIsSportsClicked}) => {
+
+      // set these false so on page refresh they dont show behind page
+      setShowWeather(false)
+      setShowTopNews(false)
   return (
     <>
     <motion.div 

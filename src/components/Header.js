@@ -20,8 +20,8 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     const [isClicked, setIsClicked] = useState(false)
     const [isTopNewsClicked, setIsTopNewsClicked] = useState(false)
     const [isSportsClicked, setIsSportsClicked] = useState(false)
-    const [showWeather, setShowWeather] = useState(true)
-    const [showTopNews, setShowTopNews] = useState(true)
+    const [showWeather, setShowWeather] = useState(false)
+    const [showTopNews, setShowTopNews] = useState(false)
     const [imgWidth, setImgWidth] = useState(null)
     const [displayDate, setDisplayDate] = useState('')
     const imgRef = useRef(null)
@@ -34,6 +34,8 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     }
     useEffect(() => {
         currentDate()
+        setShowWeather(true)
+        setShowTopNews(true)
     },[])
   
     const changedSportsClick = () => {
@@ -169,11 +171,11 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
         </div>
         <Routes>
             <Route path='/' element={<Home />}/>
-            <Route path='/tech/*' element={<div>{isClicked ?  <TechNews techNews={techNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
+            <Route path='/tech/*' element={<div>{techNews ?  <TechNews techNews={techNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
 
-            <Route path='/top/*' element={<div>{isTopNewsClicked ? <TopNews topNews={topNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
+            <Route path='/top/*' element={<div>{topNews ? <TopNews topNews={topNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
 
-            <Route path='/sports/*' element={<div>{isSportsClicked ? <SportsNews sportsNews={sportsNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
+            <Route path='/sports/*' element={<div>{sportsNews ? <SportsNews sportsNews={sportsNews} setShowWeather={setShowWeather} setShowTopNews={setShowTopNews} setIsTopNewsClicked={setIsTopNewsClicked} setIsClicked={setIsClicked} setIsSportsClicked={setIsSportsClicked}/> : ''}</div>}/>
         </Routes>
     </div>
   )

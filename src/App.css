@@ -527,6 +527,9 @@ justify-content: center;
   .top-news-section{
     width: 100%;
   }
+  .top-btn-container{
+    top: 40%;
+  }
   .top-img-home{
     width: auto;
   }
@@ -574,6 +577,9 @@ justify-content: center;
   .weather-results-container{
     align-items: center;
     padding-right: 0;
+  }
+  .weather-results-container img{
+    margin-right: 0px;
   }
   .top-news-section h2{
     left: 35%;

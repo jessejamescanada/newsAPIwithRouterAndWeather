@@ -1,7 +1,6 @@
 import './App.css';
 import {useEffect, useState} from 'react'
 import Header from './components/Header';
-import Error from './pages/Error';
 
 function App() {
   const [topNews, setTopNews] = useState([])
@@ -14,8 +13,8 @@ function App() {
   const apiKey2 = 'cbdb06c75c00a30fb0a8d241f1ef5392'
   const [cityInput, setCityInput] = useState('')
   const [userCity, setUserCity] = useState('')
-  const newsApiKey = 'a6c1d9f1334d8d1ff7508afb79fa7a26'
-  // const newsApiKey = '1909ddf9282f17d5e8e3217eb7ac411f'
+  // const newsApiKey = 'a6c1d9f1334d8d1ff7508afb79fa7a26'
+  const newsApiKey = '1909ddf9282f17d5e8e3217eb7ac411f'
 
   // Top News
   useEffect(() => {
