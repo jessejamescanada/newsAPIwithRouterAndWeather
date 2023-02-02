@@ -17,7 +17,7 @@ const TopNews = ({topNews, setShowWeather, setShowTopNews, setIsTopNewsClicked, 
                 <img src={item.image} alt={item.publishedAt} className='news-image'/>
             </div>
             <div className="news-description">
-              <p>{item.description > 200 ? `${item.description.substring(0, 200)}...` : item.description}</p>
+              <p>{item.description.length > 200 ? `${item.description.substring(0, 200)}...` : item.description}</p>
             </div>
           </a>
         )
