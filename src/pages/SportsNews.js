@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {motion} from 'framer-motion'
 import Error from './Error'
 
 const SportsNews = ({sportsNews, setShowWeather, setShowTopNews, setIsTopNewsClicked, setIsClicked, setIsSportsClicked}) => {
       // set these false so on page refresh they dont show behind page
-      setShowWeather(false)
-      setShowTopNews(false)
+      useEffect(() => {
+        setShowWeather(false)
+        setShowTopNews(false)
+      },[])
+
   return (
     <>
      <motion.div initial={{x: '-100vw'}} animate={{x: 0}} transition={{delay: 0.2, duration: 0.3, type:'tween'}}>

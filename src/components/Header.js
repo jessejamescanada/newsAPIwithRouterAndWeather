@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes } from "react-router-dom"
 import '../App.css';
 import HomeButton from './HomeButton';
@@ -12,8 +12,16 @@ import SportsNews from '../pages/SportsNews';
 import Weather from './Weather';
 import Stocks from './Stocks';
 import Home from '../pages/Home';
-import {FaChevronLeft, FaChevronRight} from 'react-icons/fa'
 import {motion} from 'framer-motion'
+
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityInput, userCity, setUserCity}) => {
 
@@ -22,10 +30,7 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
     const [isSportsClicked, setIsSportsClicked] = useState(false)
     const [showWeather, setShowWeather] = useState(false)
     const [showTopNews, setShowTopNews] = useState(false)
-    const [imgWidth, setImgWidth] = useState(null)
     const [displayDate, setDisplayDate] = useState('')
-    const imgRef = useRef(null)
-    const elementRef = useRef(null)
 
     const currentDate = () => {
         let date = new Date()
@@ -65,22 +70,6 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
             setShowTopNews(false)
         }
     }
-
-    const handleScroll = (element, speed, distance, step) => {
-        console.log(distance)
-        let scrollAmount = 0
-        const slideTimer = setInterval(() => {
-            element.scrollLeft += step
-            scrollAmount += Math.abs(step)
-            if(scrollAmount >= distance){
-                clearInterval(slideTimer)
-            }
-        }, speed);
-    }
-
-    // icon styling
-    const arrowLeftStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7' }
-    const arrowRightStyle = {fontSize: '3.5em', cursor: 'pointer', color: '#fff', opacity: '0.7'}
 
     return (
     <div>
@@ -141,29 +130,49 @@ const Header = ({techNews, topNews, sportsNews, weatherData, cityInput, setCityI
             </div>
 
             <div className="stocks-weather-container">
-                {showTopNews ? <div className="top-news-section">
-                    <h2>trending</h2>
-                <div className="top-btn-container">
-                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), -10)}><FaChevronLeft style={arrowLeftStyle}/></button>
-                         <button onClick={() => handleScroll(elementRef.current, 10, (imgWidth - 10), 10)}><FaChevronRight style={arrowRightStyle}/></button>
-                    </div>
-                    <div className="top-news-content" ref={elementRef} >
-                        {topNews ? topNews.map((item) => {
-                            return(
-                                <>
-                                <a href={item.url}  className="showcase-container">
-                                    <div ref={imgRef} key={item.url}>
-                                    <img src={item.image} className="top-img-home" alt=""  onLoad={() => setImgWidth(imgRef.current.scrollWidth)}/>
-                                    </div>
-                                    <div className="showcase-title">
-                                        {item.title}
-                                    </div>
-                                </a>
-                                </>
-                            )
-                        }): ''}
-                    </div>
-                </div> : ''}
+                {showTopNews ? 
+                <div className="top-news-section">
+                    <h2>Trending</h2>
+                    <div className="top-news-content">
+                <Swiper 
+                modules={[Navigation]}
+                    spaceBetween={5}
+                    slidesPerView={2}
+                    navigation
+                    breakpoints={{
+                        "@0.00": {
+                            slidesPerView: 1,
+                          },
+                          "@0.75": {
+                            slidesPerView: 2,
+                          },
+                          "@1.00": {
+                            slidesPerView: 2,
+                          },
+                          "@1.50": {
+                            slidesPerView: 2,
+                          }
+                    }}
+                >
+                    {topNews ? topNews.map((item) => {
+                        return(
+                        <>
+                        <SwiperSlide key={item.url} >
+                                <a href={item.url} >
+                                <img src={item.image} alt="" className='top-img-home' />
+                                <div className="showcase-title" >
+                                    {item.title.length > 40 ? `${item.title.substring(0, 40)}...` : item.title}
+                                </div>
+                                </a>  
+                        </SwiperSlide>
+                        </>
+                        )
+                    }): ''}
+                </Swiper>
+                </div>
+                </div>
+                : 
+                ''}
                 <div className="stocks-weather">       
                     {showWeather && <Stocks />}
                 </div>
